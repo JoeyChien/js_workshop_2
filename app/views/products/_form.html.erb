@@ -1,4 +1,4 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= form_with(model: product, local: true, id: "#{product.id}") do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -42,14 +42,16 @@
 
   <div class="field form-group">
     <%= form.label :tag_list %>
-    <select name="product[tag_list][]" multiple= 'true', class= 'form-control'>
-      <option value="tag1">tag1</option>
-      <option value="tag2">tag2</option>
-      <option value="tag3">tag3</option>
+    <select name="product[tag_list][]" multiple= 'true', class= 'form-control multiselect'>
+      <%= options_for_select(product.tag_list, selected: product.tag_list) %>
     </select>
   </div>
 
   <div class="actions btn btn-primary'">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script>
+
+</script>
